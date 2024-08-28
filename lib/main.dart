@@ -68,7 +68,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 );
               },
-              child: Text('Play Hard'),
+              child: Text('Play HARD'),
             ),
           ],
         ),
