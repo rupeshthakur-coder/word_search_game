@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/levels/levels.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:myapp/grid_view/cubit/grid_view_state.dart';
 
+import 'package:myapp/levels/levels_selection_page.dart'; 
 void main() {
   runApp(WordSearchApp());
 }
@@ -17,7 +19,10 @@ class WordSearchApp extends StatelessWidget {
           bodyMedium: TextStyle(fontFamily: 'DM Serif Display'),
         ),
       ),
-      home: HomeScreen(),
+      home: BlocProvider(
+        create: (_) => WordSearchCubit(),
+        child: HomeScreen(),
+      ),
     );
   }
 }
@@ -30,47 +35,25 @@ class HomeScreen extends StatelessWidget {
         title: Text('Word Search Game'),
         centerTitle: true,
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        WordSearchGame(difficulty: Difficulty.Easy),
-                  ),
-                );
-              },
-              child: Text('Play Easy'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        WordSearchGame(difficulty: Difficulty.Medium),
-                  ),
-                );
-              },
-              child: Text('Play Medium'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        WordSearchGame(difficulty: Difficulty.Hard),
-                  ),
-                );
-              },
-              child: Text('Play HARD'),
-            ),
-          ],
+      body: BlocProvider(
+        create: (_) => WordSearchCubit(),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LevelSelectionPage(),
+                    ),
+                  );
+                },
+                child: Text('Select Level'),
+              ),
+            ],
+          ),
         ),
       ),
     );
