@@ -5,7 +5,7 @@ class WordSearchState extends Equatable {
   final Set<int> correctIndices;
   final Set<List<int>> correctWords;
 
-  WordSearchState({
+  const WordSearchState({
     this.selectedIndices = const [],
     this.correctIndices = const {},
     this.correctWords = const {},
