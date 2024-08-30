@@ -2,260 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:myapp/grid_view/grid_view.dart';
 import 'package:myapp/logics/word_pacement.dart';
 
-// enum Difficulty { Easy, Medium, Hard }
-
-// class WordSearchGame extends StatefulWidget {
-//   final Difficulty difficulty;
-//   final int level;
-
-//   WordSearchGame({required this.difficulty, required this.level});
-
-//   @override
-//   _WordSearchGameState createState() => _WordSearchGameState();
-// }
-
-// class _WordSearchGameState extends State<WordSearchGame> {
-//   late WordSearchLogic wordSearchLogic;
-//   late int gridSize;
-//   late List<String> words;
-//   List<String> foundWords = [];
-
-//   final List<List<String>> easyWords = [
-//     ['CAT', 'DOG', 'BIRD'], // Level 1
-//     ['SUN', 'MOON', 'STAR'], // Level 2
-//     ['FISH', 'HEN', 'ANT'], // Level 3
-//     // Add 17 more lists of words for each level
-//   ];
-
-//   final List<List<String>> mediumWords = [
-//     ['ELEPHANT', 'GIRAFFE', 'KANGAROO'], // Level 1
-//     ['MONKEY', 'TIGER', 'LEOPARD'], // Level 2
-//     ['PENGUIN', 'OSTRICH', 'DOLPHIN'], // Level 3
-//     // Add 17 more lists of words for each level
-//   ];
-
-//   final List<List<String>> hardWords = [
-//     ['HIPPOPOTAMUS', 'CHIMPANZEE', 'CROCODILE'], // Level 1
-//     ['RHINOCEROS', 'ALLIGATOR', 'SQUIRREL'], // Level 2
-//     ['ARMADILLO', 'WOODPECKER', 'PORCUPINE'], // Level 3
-//     // Add 17 more lists of words for each level
-//   ];
-
-//   @override
-//   void initState() {
-//     super.initState();
-
-//     switch (widget.difficulty) {
-//       case Difficulty.Easy:
-//         gridSize = 8;
-//         words = easyWords[widget.level];
-//         break;
-//       case Difficulty.Medium:
-//         gridSize = 12;
-//         words = mediumWords[widget.level];
-//         break;
-//       case Difficulty.Hard:
-//         gridSize = 16;
-//         words = hardWords[widget.level];
-//         break;
-//     }
-//     wordSearchLogic = WordSearchLogic(gridSize: gridSize, words: words);
-//   }
-
-//   void _onWordSelected(List<int> selectedIndices) {
-//     String selectedWord =
-//         selectedIndices.map((index) => wordSearchLogic.grid[index]).join();
-
-//     if (words.contains(selectedWord) && !foundWords.contains(selectedWord)) {
-//       setState(() {
-//         foundWords.add(selectedWord);
-//       });
-//     }
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: Text('Word Search - Level ${widget.level + 1}')),
-//       body: Column(
-//         children: [
-//           Padding(
-//             padding: const EdgeInsets.all(8.0),
-//             child: Text(
-//               'Words to Find:',
-//               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-//             ),
-//           ),
-//           Wrap(
-//             spacing: 10.0,
-//             children: words.map((word) {
-//               bool isFound = foundWords.contains(word);
-//               return Chip(
-//                 label: Text(
-//                   word,
-//                   style: TextStyle(
-//                     color: isFound ? Colors.green : Colors.black,
-//                     decoration: isFound ? TextDecoration.lineThrough : null,
-//                   ),
-//                 ),
-//                 backgroundColor: isFound ? Colors.green.withOpacity(0.3) : null,
-//               );
-//             }).toList(),
-//           ),
-//           SizedBox(height: 20),
-//           Expanded(
-//             child: WordSearchGrid(
-//               gridSize: gridSize,
-//               gridLetters: wordSearchLogic.grid,
-//               onWordSelected: _onWordSelected,
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
-// import 'package:flutter/material.dart';
-// import 'package:myapp/grid_view/grid_view.dart';
-// import 'package:myapp/logics/word_pacement.dart';
-
-// enum Difficulty { Easy, Medium, Hard }
-
-// class WordSearchGame extends StatefulWidget {
-//   final Difficulty difficulty;
-//   final int level;
-
-//   WordSearchGame({required this.difficulty, required this.level});
-
-//   @override
-//   _WordSearchGameState createState() => _WordSearchGameState();
-// }
-
-// class _WordSearchGameState extends State<WordSearchGame> {
-//   late WordSearchLogic wordSearchLogic;
-//   late int gridSize;
-//   late List<String> words;
-//   List<String> foundWords = [];
-//   List<int> selectedIndices = [];
-
-//   final List<List<String>> easyWords = [
-//     ['CAT', 'DOG', 'BIRD'], // Level 1
-//     ['SUN', 'MOON', 'STAR'], // Level 2
-//     ['FISH', 'HEN', 'ANT'], // Level 3
-//     // Add more lists for each level
-//   ];
-
-//   final List<List<String>> mediumWords = [
-//     ['ELEPHANT', 'GIRAFFE', 'KANGAROO'], // Level 1
-//     ['MONKEY', 'TIGER', 'LEOPARD'], // Level 2
-//     ['PENGUIN', 'OSTRICH', 'DOLPHIN'], // Level 3
-//     // Add more lists for each level
-//   ];
-
-//   final List<List<String>> hardWords = [
-//     ['HIPPOPOTAMUS', 'CHIMPANZEE', 'CROCODILE'], // Level 1
-//     ['RHINOCEROS', 'ALLIGATOR', 'SQUIRREL'], // Level 2
-//     ['ARMADILLO', 'WOODPECKER', 'PORCUPINE'], // Level 3
-//     // Add more lists for each level
-//   ];
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     _initializeGame();
-//   }
-
-//   void _initializeGame() {
-//     // Initialize game settings based on difficulty and level
-//     switch (widget.difficulty) {
-//       case Difficulty.Easy:
-//         gridSize = 8;
-//         words = easyWords[widget.level];
-//         break;
-//       case Difficulty.Medium:
-//         gridSize = 12;
-//         words = mediumWords[widget.level];
-//         break;
-//       case Difficulty.Hard:
-//         gridSize = 16;
-//         words = hardWords[widget.level];
-//         break;
-//     }
-//     wordSearchLogic = WordSearchLogic(gridSize: gridSize, words: words);
-//   }
-
-//   void _onWordSelected(List<int> selectedIndices) {
-//     String selectedWord =
-//         selectedIndices.map((index) => wordSearchLogic.grid[index]).join();
-
-//     if (words.contains(selectedWord) && !foundWords.contains(selectedWord)) {
-//       setState(() {
-//         foundWords.add(selectedWord); // Mark the word as found
-//         this.selectedIndices.clear(); // Clear selections for the next word
-//       });
-//     }
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: Text('Word Search - Level ${widget.level + 1}')),
-//       body: Column(
-//         children: [
-//           Padding(
-//             padding: const EdgeInsets.all(8.0),
-//             child: Text(
-//               'Words to Find:',
-//               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-//             ),
-//           ),
-//           Wrap(
-//             spacing: 10.0,
-//             children: words.map((word) {
-//               bool isFound = foundWords.contains(word);
-//               return Chip(
-//                 label: Text(
-//                   word,
-//                   style: TextStyle(
-//                     color: isFound ? Colors.green : Colors.black,
-//                     decoration: isFound ? TextDecoration.lineThrough : null,
-//                   ),
-//                 ),
-//                 backgroundColor: isFound ? Colors.green.withOpacity(0.3) : null,
-//               );
-//             }).toList(),
-//           ),
-//           SizedBox(height: 20),
-//           Expanded(
-//             child: WordSearchGrid(
-//               gridSize: gridSize,
-//               gridLetters: wordSearchLogic.grid,
-//               onWordSelected: (indices) {
-//                 setState(() {
-//                   selectedIndices = indices;
-//                 });
-//                 _onWordSelected(indices);
-//               },
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
-
+// ignore: constant_identifier_names
 enum Difficulty { Easy, Medium, Hard }
 
 class WordSearchGame extends StatefulWidget {
   final Difficulty difficulty;
   final int level;
 
-  WordSearchGame({required this.difficulty, required this.level});
+  const WordSearchGame(
+      {super.key, required this.difficulty, required this.level});
 
   @override
-  _WordSearchGameState createState() => _WordSearchGameState();
+  State<WordSearchGame> createState() => _WordSearchGameState();
 }
 
 class _WordSearchGameState extends State<WordSearchGame> {
@@ -264,27 +22,76 @@ class _WordSearchGameState extends State<WordSearchGame> {
   late List<String> words;
   List<String> foundWords = [];
   List<int> selectedIndices = [];
-  Set<int> correctIndices = {}; // To track indices of all correctly found letters
+  Set<int> correctIndices =
+      {}; // To track indices of all correctly found letters
 
   final List<List<String>> easyWords = [
-    ['CAT', 'DOG', 'BIRD'], // Level 1
-    ['SUN', 'MOON', 'STAR'], // Level 2
-    ['FISH', 'HEN', 'ANT'], // Level 3
-    // Add more lists for each level
+    ['CAT', 'DOG', 'BIRD'],
+    ['SUN', 'MOON', 'STAR'],
+    ['FISH', 'HEN', 'ANT'],
+    ['BAT', 'RAT', 'MAT'],
+    ['CUP', 'MUG', 'JUG'],
+    ['CAR', 'BUS', 'VAN'],
+    ['MAP', 'GAP', 'NAP'],
+    ['PIN', 'BIN', 'TIN'],
+    ['BEE', 'FLY', 'ANT'],
+    ['POT', 'PAN', 'CAN'],
+    ['BOOK', 'NOTE', 'PEN'],
+    ['LEAF', 'TREE', 'ROOT'],
+    ['EYE', 'EAR', 'LIP'],
+    ['HAT', 'CAP', 'COAT'],
+    ['CHAIR', 'DESK', 'TABLE'],
+    ['LAMP', 'BULB', 'LIGHT'],
+    ['FLOOR', 'WALL', 'ROOF'],
+    ['MILK', 'JUICE', 'WATER'],
+    ['SOAP', 'SHAMPOO', 'LOTION'],
+    ['FORK', 'SPOON', 'KNIFE'],
   ];
 
   final List<List<String>> mediumWords = [
-    ['ELEPHANT', 'GIRAFFE', 'KANGAROO'], // Level 1
-    ['MONKEY', 'TIGER', 'LEOPARD'], // Level 2
-    ['PENGUIN', 'OSTRICH', 'DOLPHIN'], // Level 3
-    // Add more lists for each level
+    ['ELEPHANT', 'GIRAFFE', 'KANGAROO'],
+    ['MONKEY', 'TIGER', 'LEOPARD'],
+    ['PENGUIN', 'OSTRICH', 'DOLPHIN'],
+    ['CROCODILE', 'ALLIGATOR', 'HIPPO'],
+    ['RHINO', 'BUFFALO', 'ANTELOPE'],
+    ['ZEBRA', 'LION', 'CHEETAH'],
+    ['PANDA', 'KOALA', 'LEMUR'],
+    ['WHALE', 'SHARK', 'OCTOPUS'],
+    ['FLAMINGO', 'PEACOCK', 'PARROT'],
+    ['GORILLA', 'ORANGUTAN', 'CHIMP'],
+    ['WOLF', 'FOX', 'JACKAL'],
+    ['PYTHON', 'COBRA', 'VIPER'],
+    ['RAVEN', 'CROW', 'SPARROW'],
+    ['KITE', 'FALCON', 'EAGLE'],
+    ['OTTER', 'BEAVER', 'RACCOON'],
+    ['FERRET', 'MINK', 'WEASEL'],
+    ['SNAKE', 'LIZARD', 'GECKO'],
+    ['FROG', 'TOAD', 'NEWT'],
+    ['BAT', 'MOLE', 'SHREW'],
+    ['SALMON', 'TROUT', 'BASS'],
   ];
 
   final List<List<String>> hardWords = [
-    ['HIPPOPOTAMUS', 'CHIMPANZEE', 'CROCODILE'], // Level 1
-    ['RHINOCEROS', 'ALLIGATOR', 'SQUIRREL'], // Level 2
-    ['ARMADILLO', 'WOODPECKER', 'PORCUPINE'], // Level 3
-    // Add more lists for each level
+    ['HIPPOPOTAMUS', 'CHIMPANZEE', 'CROCODILE'],
+    ['RHINOCEROS', 'ALLIGATOR', 'SQUIRREL'],
+    ['ARMADILLO', 'WOODPECKER', 'PORCUPINE'],
+    ['PLATYPUS', 'ECHIDNA', 'WOMBAT'],
+    ['CASSOWARY', 'OSTRICH', 'EMU'],
+    ['KOMODO', 'IGUANA', 'MONITOR'],
+    ['MANATEE', 'DUGONG', 'NARWHAL'],
+    ['QUOKKA', 'NUMBAT', 'QUOLL'],
+    ['TAPIR', 'OKAPI', 'DHOLE'],
+    ['MOLE', 'SHREW', 'VOLVOX'],
+    ['RACCOON', 'BADGER', 'WOLVERINE'],
+    ['GIRAFFE', 'ZEBRA', 'IMPALA'],
+    ['ANACONDA', 'PYTHON', 'BOA'],
+    ['LIZARD', 'SALAMANDER', 'GECKO'],
+    ['OCTOPUS', 'CUTTLEFISH', 'SQUID'],
+    ['MANTIS', 'LOCUST', 'GRASSHOPPER'],
+    ['SCORPION', 'TARANTULA', 'CENTIPEDE'],
+    ['HONEYBADGER', 'WOLVERINE', 'FERRET'],
+    ['WALRUS', 'SEAL', 'SEA LION'],
+    ['NARWHAL', 'BELUGA', 'ORCA'],
   ];
 
   @override
@@ -319,7 +126,8 @@ class _WordSearchGameState extends State<WordSearchGame> {
     if (words.contains(selectedWord) && !foundWords.contains(selectedWord)) {
       setState(() {
         foundWords.add(selectedWord); // Mark the word as found
-        correctIndices.addAll(selectedIndices); // Store indices of the found word
+        correctIndices
+            .addAll(selectedIndices); // Store indices of the found word
         this.selectedIndices.clear(); // Clear selections for the next word
       });
     }
@@ -328,14 +136,24 @@ class _WordSearchGameState extends State<WordSearchGame> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Word Search - Level ${widget.level + 1}')),
+      appBar: AppBar(
+        title: Text(
+          'Word Search - Level ${widget.level + 1}',
+          style: const TextStyle(color: Colors.white),
+        ),
+        backgroundColor: const Color(0xFF2B4C7E), // Dark Blue
+      ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
+          const Padding(
+            padding: EdgeInsets.all(8.0),
             child: Text(
               'Words to Find:',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF2B4C7E), // Dark Blue
+              ),
             ),
           ),
           Wrap(
@@ -346,15 +164,19 @@ class _WordSearchGameState extends State<WordSearchGame> {
                 label: Text(
                   word,
                   style: TextStyle(
-                    color: isFound ? Colors.green : Colors.black,
+                    color: isFound
+                        ? const Color.fromARGB(255, 255, 255, 255)
+                        : const Color(0xFF2B4C7E), // Dark Blue
                     decoration: isFound ? TextDecoration.lineThrough : null,
                   ),
                 ),
-                backgroundColor: isFound ? Colors.green.withOpacity(0.3) : null,
+                backgroundColor: isFound
+                    ? const Color(0xFF2B4C7E)
+                    : const Color(0xFFE3EDF7), // Light Blue
               );
             }).toList(),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Expanded(
             child: WordSearchGrid(
               gridSize: gridSize,
@@ -370,6 +192,7 @@ class _WordSearchGameState extends State<WordSearchGame> {
           ),
         ],
       ),
+      backgroundColor: const Color(0xFFE3EDF7), // Light Blue Background
     );
   }
 }

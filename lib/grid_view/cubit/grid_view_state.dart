@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:myapp/grid_view/cubit/grid_view_cubit.dart';
 
 class WordSearchCubit extends Cubit<WordSearchState> {
-  WordSearchCubit() : super(WordSearchState());
+  WordSearchCubit() : super(const WordSearchState());
 
   void selectIndex(int index) {
     if (!state.correctIndices.contains(index)) {
@@ -33,6 +33,6 @@ class WordSearchCubit extends Cubit<WordSearchState> {
   }
 
   void resetGame() {
-    emit(WordSearchState());
+    emit(const WordSearchState());
   }
 }
