@@ -84,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   void _generateGrid() {
     const String alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-//?! there is bug that highlighted text is showing random text than the actual text
+
     // Define words to be placed
     final List<WordPlacement> words = [
       WordPlacement(
@@ -119,15 +119,22 @@ class _HomeScreenState extends State<HomeScreen>
           direction: Direction.diagonal),
     ];
 
-    // Initialize grid with random letters
-    Random random = Random();
+    // Initialize grid with empty strings
     for (int i = 0; i < _gridLetters.length; i++) {
-      _gridLetters[i] = alphabet[random.nextInt(alphabet.length)];
+      _gridLetters[i] = '';
     }
 
     // Place each word in the grid
     for (var wordPlacement in words) {
       _placeWordInGrid(wordPlacement);
+    }
+
+    // Fill remaining empty positions with random letters
+    Random random = Random();
+    for (int i = 0; i < _gridLetters.length; i++) {
+      if (_gridLetters[i] == '') {
+        _gridLetters[i] = alphabet[random.nextInt(alphabet.length)];
+      }
     }
   }
 
